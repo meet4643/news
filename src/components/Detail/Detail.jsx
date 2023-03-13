@@ -1,4 +1,3 @@
-import { Img } from "./Detailstyle.js";
 import { Content } from "./Detailstyle.js";
 import { Div, Title, Date, Link, Category, Data } from "./Detailstyle.js";
 
