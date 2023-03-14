@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+
 export const Newsbox = styled.div`
   margin: 2rem auto;
   max-width: 60rem;

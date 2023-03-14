@@ -11,8 +11,8 @@ function Navbar({ setSearch, search }) {
   }
 
   return (
-    <div>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
+    <div style={{position:'fixed', minWidth:'100%',zIndex:'1'}}>
+      <nav  className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
           <button
             className="navbar-toggler"

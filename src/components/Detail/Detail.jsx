@@ -1,8 +1,7 @@
 import { Content } from "./Detailstyle.js";
-import { Div, Title, Date, Link, Category, Data } from "./Detailstyle.js";
+import { Div, Title, Date, Link, Category, Data, } from "./Detailstyle.js";
 
 function Detail({ mapdata }) {
-  console.log(mapdata.content)
   return (
     <Div>
       <div
@@ -19,6 +18,7 @@ function Detail({ mapdata }) {
         <Content>{mapdata.content}</Content>
         <Link href={mapdata.link}>{mapdata.link}</Link>
         <Data>{mapdata.data}</Data>
+        
       </div>
     </Div>
   );

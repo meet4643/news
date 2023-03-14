@@ -1,52 +1,45 @@
 import React, { useEffect, useState } from "react";
 import { Newsbox, List, P, S, R, C } from "./Homestyle";
-import Button from "@mui/material/Button";
+import { Button, Box } from "@mui/material";
 import Detailbutton from "./DetailButton/Detailbutton.jsx";
 import Navbar from "./Navbar";
+import Country from "./Detail/filters/Country";
+import Lan from "./Detail/filters/Lan";
 
 function Home() {
   const [rows, setRows] = useState([]);
   const [open, setOpen] = useState(false);
   const [mapdata, setMapdata] = useState({});
-  const [search, setSearch] = useState('food');
+  const [search, setSearch] = useState("business");
+  const [country, setCountry] = useState("in");
+  const [lan, setLan] = useState("en");
 
-
-
+  console.log(rows)
+  
   useEffect(() => {
-  
-  const debounce = setTimeout(()=>{
-
-    fetch(
-      `https://newsdata.io/api/1/news?apikey=pub_18827f2223334afd560b31b05762b66aa8b4e&q=news&language=en&category=${search} `,
-      {
-        method: "GET",
-        headers: {},
-      }
-    )
-      .then((response) => response.json())
-      .then((data) =>
-        setRows(
-          data.results.map((row) => ({
-            ...row,
-            id: Math.floor(Math.random() * 100),
-          }))
-        )
+    const debounce = setTimeout(() => {
+      fetch(
+        `https://newsdata.io/api/1/news?apikey=pub_18872c9023dd8e05f9f9fe8262212b584b761&country=${country}&language=${lan}&category=${search}  `,
+        {
+          method: "GET",
+          headers: {},
+        }
       )
-    
-    .catch((err) => .error(err));
-  
+        .then((response) => response.json())
+        .then((data) =>
+          setRows(
+            data.results.map((row) => ({
+              ...row,
+              id: Math.floor(Math.random() * 100),
+            }))
+          )
+        )
 
+        .catch((err) => console.error(err));
+    }, 1000);
 
-  },1000)
-  
-  return() => clearTimeout(debounce)
-  
-  
-  }, [search]);
-
-  
-
-
+    return () => clearTimeout(debounce);
+  }, [search, country, lan]);
 
   // function handleClickSearch(e){
 
@@ -77,9 +70,21 @@ function Home() {
   };
 
   return (
-    <>
+    <div style={{scrollBehavior:"smooth"}}>
       <Navbar search={search} setSearch={setSearch} />
-
+      <Box
+        display="flex"
+        sx={{
+          justifyContent: "space-around",
+          paddingTop: "15px",
+          backgroundColor: "#f8f9fa",
+          padding: "10px",
+          
+        }}
+      >
+        <Country country={country} setCountry={setCountry} />
+        <Lan setLan={setLan} />
+      </Box>
       <Newsbox>
         <Detailbutton
           open={open}
@@ -89,7 +94,7 @@ function Home() {
         />
 
         {/* {rows
-         .filter((item) => {
+          .filter((item) => {
             if (search === "") {
               return item;
             } else if (
@@ -123,7 +128,7 @@ function Home() {
           </List>
         ))}
       </Newsbox>
-    </>
+    </div>
   );
 }
 
